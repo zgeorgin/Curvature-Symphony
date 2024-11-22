@@ -6,7 +6,7 @@ const int WIDTH = 1000;
 const int HEIGHT = 800;
 int main()
 {
-    std::vector<Point2D> points = {{1, 1}, {1.5, 1.5}, {2, 1}, {2, 2}, {1, 2.5}};
+    std::vector<Point2D> points = {{1, 1}, {1.5, 1.5}, {2, 1}, {0.5, 2}, {2, 2.5}};
     BezierCurve2D c(points);
     std::vector<double> t;
     for (double i = 0.0; i < 1.001; i += 0.01) t.push_back(i);

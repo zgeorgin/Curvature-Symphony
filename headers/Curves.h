@@ -53,7 +53,30 @@ public:
         T result; 
         for (int i = 0; i < points.size(); i++) result = result + BernsteinCoeff(i, points.size() - 1, t) * points[i]; 
         return result;
+    }template<typename T>
+class BezierCurve : ParamCurve<T>
+{
+public:
+    BezierCurve(size_t n) : points(std::vector<T>(n)) {}
+    BezierCurve(std::vector<T> points) : points(points) {}
+
+    void setPoint(T point, size_t number) {if (points.size() > number) points[number] = point; else throw std::range_error("number in BezierCurve.setPoint out of range!!!");}
+    T evaluate(double t) override 
+    {
+        T result; 
+        for (int i = 0; i < points.size(); i++) result = result + BernsteinCoeff(i, points.size() - 1, t) * points[i]; 
+        return result;
     }
+    std::vector<T> renderCurve(std::vector<double> t) override 
+    {
+        std::vector<T> result(t.size());
+        for (int i = 0; i < t.size(); i++) result[i] = evaluate(t[i]);
+        return result;
+    }
+private:
+    std::vector<T> points;
+};
+
     std::vector<T> renderCurve(std::vector<double> t) override 
     {
         std::vector<T> result(t.size());
